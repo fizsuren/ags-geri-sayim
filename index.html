@@ -12,9 +12,13 @@
             const today = new Date();
             const timeDiff = examDate - today;
             const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            const weeksLeft = Math.ceil(daysLeft / 7);  // Kaç hafta sonu kaldığını hesapla
 
             // Geri sayım yazısını güncelle
-            document.getElementById("countdown").innerText = `Hedefine ulaşmana ${daysLeft} gün kaldı!`;
+            document.getElementById("countdown").innerText = `13 Temmuz 2025'e ${daysLeft} gün kaldı!`;
+
+            // Hafta sonu sayısını güncelle
+            document.getElementById("weekends").innerText = `${weeksLeft} hafta sonu kaldı.`;
 
             // Rastgele motivasyon sözü
             const quotes = [
@@ -107,6 +111,35 @@
         .footer.dark-mode {
             color: #999;
         }
+        .countdown-container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+            max-width: 600px;
+            margin-top: 30px;
+        }
+        .countdown-text {
+            font-size: 16px;
+            color: #28a745;
+            font-weight: bold;
+        }
+        .weekends-text {
+            font-size: 16px;
+            color: #f39c12;
+            font-weight: bold;
+        }
+        .small-text {
+            font-size: 12px;
+            color: #888;
+            margin-top: 15px;
+        }
+        .checkbox-container {
+            margin-top: 20px;
+            text-align: left;
+        }
+        .checkbox-container input {
+            margin-right: 10px;
+        }
     </style>
 </head>
 <body onload="calculateDays()">
@@ -115,6 +148,10 @@
     </div>
     <div class="card">
         <h1 id="countdown"></h1>
+        <div class="countdown-container">
+            <p id="weekends" class="weekends-text"></p>
+            <p id="countdown-small" class="countdown-text"></p>
+        </div>
         <p id="motivation"></p>
         <div>
             💪
@@ -124,5 +161,16 @@
         <button onclick="window.open('https://www.youtube.com', '_blank')">Ders çalışmak için YouTube'a git</button>
     </div>
     <div class="footer">F. İzsüren</div>
+    
+    <div class="card">
+        <p class="small-text">Her gün paragraf çözmeyi unutma, günde 200 sorunun altına düşmemeye çalış.</p>
+        <div class="checkbox-container">
+            <label>
+                <input type="checkbox">
+                Bugün 7 saat çalıştım.
+            </label>
+        </div>
+        <p class="small-text">Paragrafları okumak için değil, bu metin ne anlatıyor diye bilgi edinmek için oku ve sakın altını çizme.</p>
+    </div>
 </body>
 </html>
