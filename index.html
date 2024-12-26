@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Geri Sayım</title>
+    <script>
+        function calculateDays() {
+            const examDate = new Date("2025-07-13");
+            const today = new Date();
+            const timeDiff = examDate - today;
+            const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+            const weeksLeft = Math.ceil(daysLeft / 7);
+
+            document.getElementById("countdown").innerText = `13 Temmuz 2025'e ${daysLeft} gün, ${weeksLeft} hafta sonu kaldı.`;
+            document.getElementById("motivation").innerHTML = 
+                "<strong>Vivere militare est.</strong><br>Yaşamak savaşmaktır.<br>" +
+                "<strong>Fortes fortuna adiuvat.</strong><br>Şans güçlüye yardımcı olur.";
+        }
+    </script>
+    <style>
+        body { text-align: center; margin-top: 20%; color: #333; }
+        h1 { font-size: 2em; }
+        p { font-size: 1.2em; }
+    </style>
+</head>
+<body onload="calculateDays()">
+    <h1 id="countdown"></h1>
+    <p id="motivation"></p>
+</body>
+</html>
