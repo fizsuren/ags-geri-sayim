@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geri Sayım</title>
     <script>
+        // Geri sayım güncellemelerini hesapla
         function calculateDays() {
             const examDate = new Date("2025-07-13");
             const today = new Date();
@@ -21,24 +22,40 @@
                 "<strong>Fortes fortuna adiuvat.</strong><br>Şans güçlüye yardımcı olur.<br><br>" +
                 "<strong>Non est ad astra mollis e terris via.</strong><br>Yıldızlara giden yol kolay değildir.<br><br>" +
                 "<strong>Per aspera ad astra.</strong><br>Zorluklar aracılığıyla yıldızlara.<br><br>" +
-                "<strong>Aut vincere aut mori.</strong><br>Ya kazan ya öl.";
+                "<strong>Aut vincere aut mori.</strong><br>Ya kazan ya da kaybet.";
+
+            // Hedef gün ve hafta sonu kısmını dinamik hale getir
+            document.getElementById("target-days").innerText = `Hedefin için ${daysLeft} gün, ${weeksLeft} hafta sonu kaldı!`;
+        }
+
+        // Dark mode açma ve kapama işlevi
+        function toggleDarkMode() {
+            const body = document.body;
+            const currentMode = body.classList.contains("dark-mode");
+            body.classList.toggle("dark-mode", !currentMode);
         }
     </script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        /* Sayfa genel düzeni */
+        /* Genel stil */
         body {
+            font-family: 'Roboto', sans-serif;
             background-image: url('https://9to5mac.com/wp-content/uploads/sites/6/2024/06/iOS18-Azure.png'); /* iOS 18 duvar kağıdı URL'si */
             background-size: cover;
             background-position: center;
-            font-family: 'Roboto', sans-serif;
+            color: #fff;
             text-align: center;
             margin-top: 20%;
-            color: #fff;
             background-attachment: fixed;
+            transition: background-color 0.5s ease, color 0.5s ease;
         }
 
-        /* Başlık stili */
+        /* Dark mode stili */
+        .dark-mode {
+            background-color: #121212;
+            color: #fff;
+        }
+
         h1 {
             font-size: 40px;
             font-weight: 600;
@@ -47,13 +64,7 @@
             text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.6);
         }
 
-        /* Paragraf ve motivasyon yazısı stili */
-        p {
-            font-size: 20px;
-            margin-top: 20px;
-            color: #f5f5f5;
-        }
-
+        /* Motivasyon yazısının stili */
         #motivation {
             font-size: 20px;
             font-weight: 500;
@@ -64,24 +75,6 @@
             line-height: 1.8;
         }
 
-        /* Onay kutusu ve küçük not */
-        .checkbox-container {
-            margin-top: 40px;
-            font-size: 16px;
-            color: #f5f5f5;
-        }
-
-        .checkbox-container input {
-            margin-right: 10px;
-        }
-
-        #small-note {
-            font-size: 12px;
-            color: #f5f5f5;
-            margin-top: 10px;
-        }
-
-        /* iOS docku gibi kutucuklar */
         .dock {
             display: flex;
             justify-content: center;
@@ -107,17 +100,39 @@
             background-color: rgba(0, 0, 0, 0.8);
         }
 
-        /* Duyuru kısmı */
+        .text-dock {
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 15px;
+            margin-top: 30px;
+            width: 80%;
+            text-align: left;
+            margin-bottom: 40px;
+        }
+
+        .text-dock h3 {
+            font-size: 24px;
+            color: #f39c12;
+            margin-bottom: 10px;
+        }
+
+        .text-dock p {
+            font-size: 18px;
+            color: #f5f5f5;
+            margin: 5px 0;
+        }
+
         #footer {
-            font-size: 14px;
+            font-size: 12px;
             color: #f5f5f5;
             position: absolute;
             bottom: 10px;
             left: 50%;
             transform: translateX(-50%);
+            text-align: center;
         }
 
-        /* Buton stili */
         #study-button {
             background-color: #f39c12;
             border: none;
@@ -133,11 +148,56 @@
         #study-button:hover {
             background-color: #e67e22;
         }
+
+        /* Onay kutusu ve küçük not */
+        .checkbox-container {
+            margin-top: 40px;
+            font-size: 16px;
+            color: #f5f5f5;
+        }
+
+        .checkbox-container input {
+            margin-right: 10px;
+        }
+
+        #small-note {
+            font-size: 12px;
+            color: #f5f5f5;
+            margin-top: 10px;
+        }
+
+        #toggle-dark-mode {
+            font-size: 18px;
+            color: #fff;
+            background-color: #333;
+            padding: 10px 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        #toggle-dark-mode:hover {
+            background-color: #444;
+        }
     </style>
 </head>
 <body onload="calculateDays()">
     <h1 id="countdown"></h1>
-    <p id="motivation"></p>
+
+    <!-- Hedef ve geri sayım kısmı -->
+    <div class="text-dock">
+        <h3>Hedefe Ulaşmana...</h3>
+        <p id="target-days"></p>
+    </div>
+
+    <!-- Motivasyon sözleri -->
+    <div id="motivation">
+        <!-- Dinamik olarak yüklenecek stoik sözler -->
+    </div>
+
+    <!-- Dark mode açma/kapama butonu -->
+    <button id="toggle-dark-mode" onclick="toggleDarkMode()">Dark Mode</button>
 
     <!-- iOS docku gibi kutucuklar -->
     <div class="dock">
@@ -146,7 +206,7 @@
         <div class="box">⏳</div>
     </div>
 
-    <!-- Onay kutucuğu ve küçük not -->
+    <!-- Onay kutusu ve küçük not -->
     <div class="checkbox-container">
         <label>
             <input type="checkbox" id="study-hours"> Bugün 7 saat çalıştım.
@@ -157,15 +217,15 @@
         Paragrafları okumak için değil, bu metin ne anlatıyor diye bilgi edinmek için oku ve sakın altını çizme!
     </p>
 
-    <!-- Geri sayım yazısı ve motivasyon sözleri -->
+    <!-- YouTube butonu -->
+    <button id="study-button" onclick="window.open('https://www.youtube.com', '_blank')">
+        YouTube'a git
+    </button>
+
+    <!-- Footer kısmı -->
     <div id="footer">
         <p>F. İzsüren</p>
         <p>Her gün paragraf çözmeyi unutma, günde 200 sorunun altına düşmemeye çalış.</p>
     </div>
-
-    <!-- YouTube butonu -->
-    <button id="study-button" onclick="window.open('https://www.youtube.com', '_blank')">
-        YouTube'a git ve ders çalışmaya başla!
-    </button>
 </body>
 </html>
