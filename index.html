@@ -5,27 +5,124 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Geri Sayım</title>
     <script>
+        let isDarkMode = false;
+
         function calculateDays() {
             const examDate = new Date("2025-07-13");
             const today = new Date();
             const timeDiff = examDate - today;
             const daysLeft = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-            const weeksLeft = Math.ceil(daysLeft / 7);
 
-            document.getElementById("countdown").innerText = `13 Temmuz 2025'e ${daysLeft} gün, ${weeksLeft} hafta sonu kaldı.`;
-            document.getElementById("motivation").innerHTML = 
-                "<strong>Vivere militare est.</strong><br>Yaşamak savaşmaktır.<br>" +
-                "<strong>Fortes fortuna adiuvat.</strong><br>Şans güçlüye yardımcı olur.";
+            // Geri sayım yazısını güncelle
+            document.getElementById("countdown").innerText = `Hedefine ulaşmana ${daysLeft} gün kaldı!`;
+
+            // Rastgele motivasyon sözü
+            const quotes = [
+                "Vivere militare est. - Yaşamak savaşmaktır.",
+                "Fortes fortuna adiuvat. - Şans güçlüye yardımcı olur.",
+                "Per aspera ad astra. - Zorluklar aracılığıyla yıldızlara.",
+                "Aut vincere aut mori. - Ya kazan ya öl.",
+                "Non est ad astra mollis e terris via. - Yıldızlara giden yol kolay değildir."
+            ];
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById("motivation").innerText = randomQuote;
+        }
+
+        function toggleDarkMode() {
+            isDarkMode = !isDarkMode;
+            const body = document.body;
+            if (isDarkMode) {
+                body.classList.add("dark-mode");
+            } else {
+                body.classList.remove("dark-mode");
+            }
         }
     </script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
     <style>
-        body { text-align: center; margin-top: 20%; color: #333; }
-        h1 { font-size: 2em; }
-        p { font-size: 1.2em; }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #e0e0e0;
+            color: #333;
+            transition: all 0.3s ease;
+        }
+        body.dark-mode {
+            background: #121212;
+            color: #f0f0f0;
+        }
+        h1 {
+            font-size: 36px;
+            font-weight: 600;
+            margin: 10px;
+        }
+        .card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 10px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        .card.dark-mode {
+            background: rgba(50, 50, 50, 0.8);
+        }
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #toggle-dark-mode {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+        }
+        #motivation {
+            font-size: 18px;
+            font-weight: 500;
+            font-style: italic;
+            margin-top: 20px;
+        }
+        .footer {
+            margin-top: 30px;
+            font-size: 14px;
+            color: #666;
+        }
+        .footer.dark-mode {
+            color: #999;
+        }
     </style>
 </head>
 <body onload="calculateDays()">
-    <h1 id="countdown"></h1>
-    <p id="motivation"></p>
+    <div id="toggle-dark-mode">
+        <button onclick="toggleDarkMode()">Dark Mode On/Off</button>
+    </div>
+    <div class="card">
+        <h1 id="countdown"></h1>
+        <p id="motivation"></p>
+        <div>
+            💪
+        </div>
+    </div>
+    <div class="card">
+        <button onclick="window.open('https://www.youtube.com', '_blank')">Ders çalışmak için YouTube'a git</button>
+    </div>
+    <div class="footer">F. İzsüren</div>
 </body>
 </html>
